@@ -13,7 +13,8 @@ import os
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
-from predict import create_multiple
+from predict import create_recipe
+# from sanjivkapoor_scraper import scrape_sanjeev
 
 
 
@@ -23,6 +24,7 @@ Base = declarative_base()
 app = Flask(__name__)
 
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 cors = CORS(app)
 
 app.config['JWT_SECRET_KEY'] = 'cookeazyansjsdahdja123123nasd1212'
@@ -271,6 +273,49 @@ def get_used_ingredients(user):
     return jsonify({'message': message})
 
 
+@app.route('/api/saved-recipes', methods=['GET'])
+def get_saved_recipes():
+    # Logic to fetch and return saved recipes from the database
+    # Example code:
+    saved_recipes = SavedRecipe.query.all()
+    serialized_recipes = []
+    for recipe in saved_recipes:
+        serialized_recipes.append({
+            'id': recipe.id,
+            'name': recipe.name,
+            'instructions': recipe.instructions,
+            'ingredients': recipe.ingredients
+        })
+    return jsonify(serialized_recipes)
+
+@app.route('/api/saved-recipes', methods=['POST'])
+def save_recipe():
+    # Logic to save a recipe to the database
+    # Access recipe data from the request JSON payload
+    recipe_data = request.json
+    name = recipe_data['name']
+    instructions = recipe_data['instructions']
+    ingredients = recipe_data['ingredients']
+
+    # Create a new SavedRecipe instance and save it to the database
+    new_recipe = SavedRecipe(name=name, instructions=instructions, ingredients=ingredients)
+    session.add(new_recipe)
+    session.commit()
+
+    return jsonify({'message': 'Recipe saved successfully'})
+
+@app.route('/api/saved-recipes/<recipe_id>', methods=['DELETE'])
+def delete_saved_recipe(recipe_id):
+    # Logic to delete a saved recipe from the database
+    recipe = session.query(SavedRecipe).get(recipe_id)
+    if not recipe:
+        return jsonify({'error': 'Recipe not found'})
+
+    session.delete(recipe)
+    session.commit()
+
+    return jsonify({'message': 'Recipe deleted successfully'})
+
 # @app.route('/api/add_user', methods=['POST'])
 # def add_user():
 #     email = request.json['email']
@@ -292,49 +337,74 @@ def get_used_ingredients(user):
     
 #     return jsonify({'message': 'User added successfully.', 'access_token': access_token})
 
-@app.route('/api/users/<int:user_id>', methods=['PUT'])
-def update_user(user_id):
-    user = session.query(User).get(user_id)
+# @app.route('/api/users/<int:user_id>', methods=['PUT'])
+# def update_user(user_id):
+#     user = session.query(User).get(user_id)
 
-    if not user:
-        return jsonify({'message': 'User not found'}), 404
+#     if not user:
+#         return jsonify({'message': 'User not found'}), 404
 
-    # get the request data
-    data = request.get_json()
+#     # get the request data
+#     data = request.get_json()
 
-    # update user data
-    user.email = data['email']
-    user.password = data['password']
+#     # update user data
+#     user.email = data['email']
+#     user.password = data['password']
 
-    try:
-        session.commit()
-        return jsonify({'message': 'User updated successfully'}), 200
-    except:
-        session.rollback()
-        return jsonify({'message': 'Failed to update user'}), 500
-    finally:
-        session.close()
+#     try:
+#         session.commit()
+#         return jsonify({'message': 'User updated successfully'}), 200
+#     except:
+#         session.rollback()
+#         return jsonify({'message': 'Failed to update user'}), 500
+#     finally:
+#         session.close()
 
-@app.route('/api/users/<int:user_id>', methods=['DELETE'])
-def delete_user(user_id):
-    user = session.query(User).get(user_id)
-    if not user:
-        return jsonify({'message': 'User not found.'}), 404
+# @app.route('/api/users/<int:user_id>', methods=['DELETE'])
+# def delete_user(user_id):
+#     user = session.query(User).get(user_id)
+#     if not user:
+#         return jsonify({'message': 'User not found.'}), 404
 
-    session.delete(user)
-    session.commit()
-    return jsonify({'message': 'User deleted successfully.'}), 200
+#     session.delete(user)
+#     session.commit()
+#     return jsonify({'message': 'User deleted successfully.'}), 200
 
 
 
 @app.route('/generate-recipes', methods=['POST'])
 def generate_recipes():
     data = request.json.get('ingredients')
-    return jsonify({"Recipies":create_multiple(data)}),200
+    data = ", ".join(data)
+    return jsonify({"Recipies":create_recipe(data)}),200
 
-def writetofile(content):
-    with open('recipes.txt', 'w') as f:
-        f.write(content)
+
+from sanjivkapoor_scraper import scrape_sanjeev, scrape_sanjeev_recipe
+from archanaskitchen_scrapper import scrape_archanas, scrape_archanas_recipe
+
+@app.route('/quick_links',methods=['POST'])
+def get_scraping():
+    ingredients = request.json.get('ingredients')
+    ingredients = ",".join(ingredients)
+    # ret = scrape_sanjeev(ingredients)
+    ret = scrape_archanas(ingredients)
+    return jsonify({"Status":"success","result":ret})
+
+
+@app.route('/get_scrapped_recipes',methods=['POST'])
+def get_scraped_recipe():
+    ingredients = request.json.get('ingredients')
+    ingredients = ",".join(ingredients)
+    ret = scrape_sanjeev(ingredients)
+    op = []
+    op.append(scrape_sanjeev_recipe(ret[0]))
+    op.append(scrape_sanjeev_recipe(ret[1]))
+    op.append(scrape_sanjeev_recipe(ret[2]))
+    
+
+    return jsonify({"Status":"success","result":op})
+
+
 
 
 if __name__ == "__main__":
