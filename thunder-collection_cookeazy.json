@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "cookeazy",
-    "dateExported": "2023-05-22T18:41:37.808Z",
+    "dateExported": "2023-05-28T12:26:57.923Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -183,49 +183,19 @@
             "_id": "4ccef853-c6d6-4b03-a7fe-afd11abd858b",
             "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
             "containerId": "",
-            "name": "get_recipies",
+            "name": "generate_recipes",
             "url": "http://127.0.0.1:5000/generate-recipes",
             "method": "POST",
             "sortNum": 90000,
             "created": "2023-05-11T11:22:27.912Z",
-            "modified": "2023-05-22T17:51:35.708Z",
+            "modified": "2023-05-23T06:32:48.941Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"ingredients\":[\"paneer\", \"onions\", \"tomatoes\",\"green chillies\"]\n  \n}",
+                "raw": "{\n    \"ingredients\":[\"chicken\", \"onions\", \"tomatoes\",\"green chillies\"]\n  \n}",
                 "form": []
             },
-            "tests": []
-        },
-        {
-            "_id": "54c2c738-f34f-40b4-8d58-5e5031173294",
-            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
-            "containerId": "",
-            "name": "Supercook",
-            "url": "https://d1.supercook.com/dyn/results?needimage=1&app=1&kitchen=paneer onions tomatoes",
-            "method": "POST",
-            "sortNum": 95000,
-            "created": "2023-05-11T18:43:50.640Z",
-            "modified": "2023-05-22T10:44:56.710Z",
-            "headers": [],
-            "params": [
-                {
-                    "name": "needimage",
-                    "value": "1",
-                    "isPath": false
-                },
-                {
-                    "name": "app",
-                    "value": "1",
-                    "isPath": false
-                },
-                {
-                    "name": "kitchen",
-                    "value": "paneer onions tomatoes ",
-                    "isPath": false
-                }
-            ],
             "tests": []
         },
         {
@@ -322,72 +292,6 @@
             "tests": []
         },
         {
-            "_id": "9d6b97af-7680-4b25-9d59-92b169a2d0d2",
-            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
-            "containerId": "",
-            "name": "spoonacular",
-            "url": "https://api.spoonacular.com/recipes/findByIngredients?apiKey=feac1ebac701442ca74575e53e092e4f&ingredients=apples,+flour,+sugar&number=2",
-            "method": "GET",
-            "sortNum": 130000,
-            "created": "2023-05-17T18:27:47.151Z",
-            "modified": "2023-05-22T11:06:17.015Z",
-            "headers": [
-                {
-                    "name": "x-api-key",
-                    "value": "feac1ebac701442ca74575e53e092e4f"
-                }
-            ],
-            "params": [
-                {
-                    "name": "apiKey",
-                    "value": "feac1ebac701442ca74575e53e092e4f",
-                    "isPath": false
-                },
-                {
-                    "name": "ingredients",
-                    "value": "apples,+flour,+sugar",
-                    "isPath": false
-                },
-                {
-                    "name": "number",
-                    "value": "2",
-                    "isPath": false
-                }
-            ],
-            "body": {
-                "type": "formdata",
-                "raw": "",
-                "form": [
-                    {
-                        "name": "ingredients",
-                        "value": "paneer, onion, tomato",
-                        "isDisabled": true
-                    },
-                    {
-                        "name": "number ",
-                        "value": "10",
-                        "isDisabled": true
-                    },
-                    {
-                        "name": "limitLicense",
-                        "value": "true",
-                        "isDisabled": true
-                    },
-                    {
-                        "name": "ranking ",
-                        "value": "1",
-                        "isDisabled": true
-                    },
-                    {
-                        "name": "ignorePantry ",
-                        "value": "true",
-                        "isDisabled": true
-                    }
-                ]
-            },
-            "tests": []
-        },
-        {
             "_id": "60221f74-1d12-4c05-92a7-51001c7a1fcf",
             "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
             "containerId": "",
@@ -421,25 +325,6 @@
             "body": {
                 "type": "json",
                 "raw": "{\n    \"ingredients\":[\"paneer\", \"onions\", \"tomatoes\",\"green chillies\"]\n  \n}",
-                "form": []
-            },
-            "tests": []
-        },
-        {
-            "_id": "d85a1460-e71e-492b-9cf6-b3214d0cd3c9",
-            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
-            "containerId": "",
-            "name": "scrape_recipes",
-            "url": "http://127.0.0.1:5000/scrape_recipes",
-            "method": "POST",
-            "sortNum": 160000,
-            "created": "2023-05-22T18:41:16.653Z",
-            "modified": "2023-05-22T18:41:16.653Z",
-            "headers": [],
-            "params": [],
-            "body": {
-                "type": "json",
-                "raw": "{\n  \"ingredients\":[\"tomato\",\"onion\",\"chicken\"]\n}",
                 "form": []
             },
             "tests": []
