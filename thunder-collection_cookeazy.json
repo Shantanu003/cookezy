@@ -1,0 +1,448 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "cookeazy",
+    "dateExported": "2023-05-22T18:41:37.808Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "4d00d7ea-565d-4df4-89e4-7fb3112b8210",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "add_user",
+            "url": "http://127.0.0.1:5000/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-04-19T19:34:03.872Z",
+            "modified": "2023-05-21T11:28:34.366Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "usename",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\" : \"joe\",\n  \"email\" : \"joe1234@gmail.com\",\n  \"password\" : \"joe@1234\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3d492c69-158f-4c27-8c1a-cb3b94fe80a2",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "add_ingredients",
+            "url": "http://127.0.0.1:5000/api/users/ingredients",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-04-19T19:37:01.239Z",
+            "modified": "2023-05-21T11:29:52.760Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NDY3MDMzMH0.iV5vSbePzMYm41qRo1Xl91WIzYf9CwBij3rv3hEx5Cw"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "\n{\n  \"name\" : \"milk\",\n  \"quantity\" : \"2000\",\n  \"unit\" : \"ml\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "b8933bed-ec93-48eb-ba0d-63fc39eda4d2",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "get_user_ingredients",
+            "url": "http://127.0.0.1:5000/api/users/ingredients",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-04-19T19:41:38.988Z",
+            "modified": "2023-05-21T11:30:09.472Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NDY3MDMzMH0.iV5vSbePzMYm41qRo1Xl91WIzYf9CwBij3rv3hEx5Cw"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a6475f42-407a-4a78-b17f-a2004a57a50f",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "update_ingredient",
+            "url": "http://127.0.0.1:5000/api/users/ingredients/Gram flour",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-04-19T20:22:34.036Z",
+            "modified": "2023-05-12T09:52:29.365Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNCIsImV4cCI6MTY4Mzg4NjY3OX0.CXD0w_p_5flhkZZgtfV7bbCt3XwAxIhnL1Mz1K8b9YM"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\" : \"Gram flour\",\n  \"quantity\" : \"6000\",\n  \"unit\" : \"grams\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "cbcbf333-f5bd-4875-8887-2b65259671c3",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "delete_ingredient",
+            "url": "http://127.0.0.1:5000/api/users/ingredients/Gram flour",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-04-19T20:26:59.292Z",
+            "modified": "2023-05-12T12:46:21.500Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNCIsImV4cCI6MTY4Mzg5NzMxMX0.w7ptt64k2j2bH6X9y5SGzkBdlqH5OMQMihAjZjTInY4"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "65c9fa2c-fd57-47ea-8b5c-9b5986186b5c",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "used_ingredients",
+            "url": "http://127.0.0.1:5000/api/users/used_ingredients",
+            "method": "POST",
+            "sortNum": 55000,
+            "created": "2023-05-12T06:58:19.774Z",
+            "modified": "2023-05-12T10:16:49.620Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNCIsImV4cCI6MTY4Mzg4NjY3OX0.CXD0w_p_5flhkZZgtfV7bbCt3XwAxIhnL1Mz1K8b9YM"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\" : \"Gram flour\",\n  \"quantity\" : \"4600\",\n  \"unit\" : \"grams\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "169ba98f-7b76-4608-b0cc-b8280aea0ab9",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "update_user",
+            "url": "http://127.0.0.1:5000/api/users/1",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2023-04-19T20:27:58.797Z",
+            "modified": "2023-04-19T20:30:40.077Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\" : \"qweqwrqrr@gmail.com\",\n  \"password\" : \"pass@123\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "c3f0b568-dc36-4ecf-9aac-9b674ce508a1",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "login",
+            "url": "http://127.0.0.1:5000/login",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-04-22T13:01:08.283Z",
+            "modified": "2023-05-12T08:25:01.765Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\" : \"pass\",\n  \"password\" : \"pass@1234\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "4ccef853-c6d6-4b03-a7fe-afd11abd858b",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "get_recipies",
+            "url": "http://127.0.0.1:5000/generate-recipes",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2023-05-11T11:22:27.912Z",
+            "modified": "2023-05-22T17:51:35.708Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"ingredients\":[\"paneer\", \"onions\", \"tomatoes\",\"green chillies\"]\n  \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "54c2c738-f34f-40b4-8d58-5e5031173294",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "Supercook",
+            "url": "https://d1.supercook.com/dyn/results?needimage=1&app=1&kitchen=paneer onions tomatoes",
+            "method": "POST",
+            "sortNum": 95000,
+            "created": "2023-05-11T18:43:50.640Z",
+            "modified": "2023-05-22T10:44:56.710Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "needimage",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "app",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "kitchen",
+                    "value": "paneer onions tomatoes ",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "7869e50f-2e8d-4749-a61a-fd14ef00f1bf",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "supercook rid",
+            "url": "https://d1.supercook.com/dyn/details",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2023-05-11T18:48:03.850Z",
+            "modified": "2023-05-22T11:35:16.744Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "rid",
+                        "value": "958ef298e29bc270db593be727e60750"
+                    },
+                    {
+                        "name": "ingredients",
+                        "value": "onion,tomato,paneer",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "bb3ac7d8-a187-43d9-8aa0-6588a033673b",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "supercook result",
+            "url": "https://d1.supercook.com/dyn/results",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2023-05-17T17:50:36.591Z",
+            "modified": "2023-05-22T11:36:28.695Z",
+            "headers": [
+                {
+                    "name": "Origin",
+                    "value": "https://www.supercook.com",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Referer",
+                    "value": "https://www.supercook.com",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "kitchen",
+                        "value": "chicken,tomato,onion"
+                    },
+                    {
+                        "name": "needsimage",
+                        "value": "1"
+                    },
+                    {
+                        "name": "app",
+                        "value": "1"
+                    },
+                    {
+                        "name": "fave",
+                        "value": "false"
+                    },
+                    {
+                        "name": "lang",
+                        "value": "en"
+                    },
+                    {
+                        "name": "cv",
+                        "value": "2"
+                    },
+                    {
+                        "name": "start ",
+                        "value": "100"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "9d6b97af-7680-4b25-9d59-92b169a2d0d2",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "spoonacular",
+            "url": "https://api.spoonacular.com/recipes/findByIngredients?apiKey=feac1ebac701442ca74575e53e092e4f&ingredients=apples,+flour,+sugar&number=2",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-05-17T18:27:47.151Z",
+            "modified": "2023-05-22T11:06:17.015Z",
+            "headers": [
+                {
+                    "name": "x-api-key",
+                    "value": "feac1ebac701442ca74575e53e092e4f"
+                }
+            ],
+            "params": [
+                {
+                    "name": "apiKey",
+                    "value": "feac1ebac701442ca74575e53e092e4f",
+                    "isPath": false
+                },
+                {
+                    "name": "ingredients",
+                    "value": "apples,+flour,+sugar",
+                    "isPath": false
+                },
+                {
+                    "name": "number",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "ingredients",
+                        "value": "paneer, onion, tomato",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "number ",
+                        "value": "10",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "limitLicense",
+                        "value": "true",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "ranking ",
+                        "value": "1",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "ignorePantry ",
+                        "value": "true",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "60221f74-1d12-4c05-92a7-51001c7a1fcf",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "get_scrapped_recipes",
+            "url": "http://127.0.0.1:5000/get_scrapped_recipes",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2023-05-22T18:40:35.826Z",
+            "modified": "2023-05-22T18:40:35.826Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"ingredients\":[\"paneer\", \"onions\", \"tomatoes\",\"green chillies\"]\n  \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f0410677-918d-493c-a82f-10310cd863bc",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "quick_links",
+            "url": "http://127.0.0.1:5000/quick_links",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2023-05-22T18:40:55.658Z",
+            "modified": "2023-05-22T18:40:55.658Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"ingredients\":[\"paneer\", \"onions\", \"tomatoes\",\"green chillies\"]\n  \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d85a1460-e71e-492b-9cf6-b3214d0cd3c9",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "scrape_recipes",
+            "url": "http://127.0.0.1:5000/scrape_recipes",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-05-22T18:41:16.653Z",
+            "modified": "2023-05-22T18:41:16.653Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"ingredients\":[\"tomato\",\"onion\",\"chicken\"]\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
