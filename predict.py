@@ -1,8 +1,14 @@
 import threading
 import time
+import os
 from transformers import pipeline
 
-pl = pipeline(task='text-generation',model='./CookGPT')
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
+model_path = os.path.join(current_directory, 'CookGPT')
+print(model_path)
+
+pl = pipeline(task='text-generation',model=model_path)
 
 
 def create_prompt(ingredients):
@@ -32,23 +38,23 @@ import random
 
 
 
-def create_multiple(ingredients):
-    ing = []
-    # ingredients1 = ' '.join([map(str(),ingredients.split(","))])
-    # ingredients1 = ingredients1.split(",")
-    for i in range(1):
-      tmplst = ingredients.copy()
-      # print(tmplst)
-      indx = random.randint(0,len(ingredients)-1)
-      tmplst.pop(indx)
-      tmplst = ",".join(tmplst.copy())
-      ing.append(tmplst)
+# def create_multiple(ingredients):
+#     ing = []
+#     # ingredients1 = ' '.join([map(str(),ingredients.split(","))])
+#     # ingredients1 = ingredients1.split(",")
+#     for i in range(1):
+#       tmplst = ingredients.copy()
+#       # print(tmplst)
+#       indx = random.randint(0,len(ingredients)-1)
+#       tmplst.pop(indx)
+#       tmplst = ",".join(tmplst.copy())
+#       ing.append(tmplst)
     
-    return create_multiple_recipies(ing)
+#     return create_multiple_recipies(ing)
 
-def create_multiple_recipies(ingredients):
+def create_recipe(ingredients):
     recipes = []
-    print("generating recipies")
+    print("generating recipes")
 
     for ing in ingredients:
         prompt = create_prompt(ing)
