@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "cookeazy",
-    "dateExported": "2023-05-28T12:26:57.923Z",
+    "dateExported": "2023-05-30T04:15:41.466Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -40,17 +40,17 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-04-19T19:37:01.239Z",
-            "modified": "2023-05-21T11:29:52.760Z",
+            "modified": "2023-05-30T03:28:59.359Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NDY3MDMzMH0.iV5vSbePzMYm41qRo1Xl91WIzYf9CwBij3rv3hEx5Cw"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NTQxODk0NH0.RoAHIrZFx98_tVP8Ss8xjVgZxPT6FL59ZZ54yR7IwIM"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "\n{\n  \"name\" : \"milk\",\n  \"quantity\" : \"2000\",\n  \"unit\" : \"ml\"\n}",
+                "raw": "\n{\n  \"name\" : \"soyabean\",\n  \"quantity\" : \"2000\",\n  \"unit\" : \"gm\"\n}",
                 "form": []
             },
             "tests": []
@@ -327,6 +327,68 @@
                 "raw": "{\n    \"ingredients\":[\"paneer\", \"onions\", \"tomatoes\",\"green chillies\"]\n  \n}",
                 "form": []
             },
+            "tests": []
+        },
+        {
+            "_id": "783554df-2fa1-43aa-88e5-7119a0172996",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "save_recipe",
+            "url": "http://127.0.0.1:5000/api/users/save_recipe",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-05-30T03:15:34.577Z",
+            "modified": "2023-05-30T04:12:34.656Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NTQyMTQ4NH0.1ahlWnqOdGH_rz93kQBCwo-3U6vbDgUEGMIBfZwFGDY"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"recipe\" : \"Ingredients: paneer,salt,ginger,green chillies,asafoetida (hing),red chilli powder,coriander (dhania) leaves,curry leaves,cumin seeds (jeera),coriander powder,turmeric powder,sunflower oil Instructions:To prepare Palak Palak Recipe (Paneer Palak Recipe), soak the palak in water for about 4 to 5 hours.After 4 to 5 hours, drain the excess water and rinse the palak with cold water.Heat oil in a heavy bottomed pan; add cumin seeds and asafoetida and allow it to crackle.Add the curry leaves and asafoetida, sauté for a minute.Add the paneer cubes and stir well.Once the paneer cubes are well coated in the paneer, add the turmeric powder, red chilli powder, coriander powder, asafoetida, red chilli powder and salt to taste.Stir in the paneer cubes and stir for about a minute.Add 1 cup warm water to make a thick palak batter.Cover with a lid and cook the Palak Palak for 3 to 4 whistles.Turn off the heat and allow the Palak Palak’s to cool down completely.The palak will continue to cook under the pressure and the palak palak’s will not retain their crunchy texture when cooked under pressure.To prepare the Paneer Palak Recipe, heat oil in a pan.Add asafoetida, ginger, green chillies and curry leaves and sauté for about 2 minutes.Add the palak palak’s to the hot oil and fry on medium high flame until it turns light brown in color and the palak palak’s are cooked well.Once the oil is hot, remove them from the pan and keep aside.To prepare the Paneer Palak Recipe, heat a skillet with oil, add cumin seeds and let the seeds crackle.\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "17f0e7b9-a354-4734-a705-c27b19eec537",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "get_saved_recipes",
+            "url": "http://127.0.0.1:5000/api/users/get_saved_recipes",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2023-05-30T03:32:51.813Z",
+            "modified": "2023-05-30T04:08:30.433Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NTQyMTQ4NH0.1ahlWnqOdGH_rz93kQBCwo-3U6vbDgUEGMIBfZwFGDY"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "cd5d5070-f6a1-48d5-a0d3-8bfd6a94fb60",
+            "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
+            "containerId": "",
+            "name": "delete_saved_recipe",
+            "url": "http://127.0.0.1:5000/api/users/delete_saved_recipe/2",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2023-05-30T04:13:41.102Z",
+            "modified": "2023-05-30T04:14:38.090Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NTQyMTQ4NH0.1ahlWnqOdGH_rz93kQBCwo-3U6vbDgUEGMIBfZwFGDY"
+                }
+            ],
+            "params": [],
             "tests": []
         }
     ]

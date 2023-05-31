@@ -9,7 +9,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, backref
 from sqlalchemy.sql import *
 import os
-# from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
@@ -75,9 +74,7 @@ class SavedRecipe(Base):
     __tablename__ = 'saved_recipes'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(100), nullable=False)
-    ingredients = Column(Text, nullable=False)
-    instructions = Column(Text, nullable=False)
+    recipe = Column(Text, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
 
     user = relationship('User', backref='saved_recipes', lazy=True)
@@ -124,6 +121,10 @@ def register():
     user = session.query(User).filter_by(username = username).first()
     if user:
         return jsonify({'error': 'Username already exists.'}), 400
+    
+    user = session.query(User).filter_by(email = email).first()
+    if user:
+        return jsonify({'error': 'Email already exists.'}), 400
     
     hashed_password = generate_password_hash(password, method='sha256')
 
@@ -236,6 +237,12 @@ def get_used_ingredients(user):
 
     name = request.json['name']
     quantity = request.json['quantity']
+
+
+
+
+
+    
     unit = request.json['unit']
 
 
@@ -273,43 +280,51 @@ def get_used_ingredients(user):
     return jsonify({'message': message})
 
 
-@app.route('/api/saved-recipes', methods=['GET'])
-def get_saved_recipes():
-    # Logic to fetch and return saved recipes from the database
-    # Example code:
-    saved_recipes = SavedRecipe.query.all()
+
+@app.route('/api/users/get_saved_recipes', methods=['GET'])
+@token_required
+def get_saved_recipes(user):
+    # Logic to fetch and return saved recipes for the logged-in user from the database
+    user = session.query(User).filter_by(id=user.id).first()
+
+    saved_recipes = session.query(SavedRecipe).filter_by(user_id=user.id).all()
     serialized_recipes = []
     for recipe in saved_recipes:
         serialized_recipes.append({
             'id': recipe.id,
-            'name': recipe.name,
-            'instructions': recipe.instructions,
-            'ingredients': recipe.ingredients
+            'recipe': recipe.recipe
         })
+    
     return jsonify(serialized_recipes)
 
-@app.route('/api/saved-recipes', methods=['POST'])
-def save_recipe():
+
+@app.route('/api/users/save_recipe', methods=['POST'])
+@token_required
+def save_recipe(user):
     # Logic to save a recipe to the database
     # Access recipe data from the request JSON payload
     recipe_data = request.json
-    name = recipe_data['name']
-    instructions = recipe_data['instructions']
-    ingredients = recipe_data['ingredients']
+    recipe = recipe_data['recipe']
 
-    # Create a new SavedRecipe instance and save it to the database
-    new_recipe = SavedRecipe(name=name, instructions=instructions, ingredients=ingredients)
+    user = session.query(User).filter_by(id=user.id).first()
+
+    # Create a new SavedRecipe instance associated with the user and save it to the database
+    new_recipe = SavedRecipe(recipe=recipe, user_id=user.id)
     session.add(new_recipe)
     session.commit()
 
+
     return jsonify({'message': 'Recipe saved successfully'})
 
-@app.route('/api/saved-recipes/<recipe_id>', methods=['DELETE'])
-def delete_saved_recipe(recipe_id):
+@app.route('/api/users/delete_saved_recipe/<recipe_id>', methods=['DELETE'])
+@token_required
+def delete_saved_recipe(user, recipe_id):
     # Logic to delete a saved recipe from the database
-    recipe = session.query(SavedRecipe).get(recipe_id)
+    user = session.query(User).filter_by(id=user.id).first() 
+
+    recipe = session.query(SavedRecipe).filter_by(id=recipe_id, user_id=user.id).first()
     if not recipe:
-        return jsonify({'error': 'Recipe not found'})
+        return jsonify({'error': 'Recipe not found or unauthorized'})
 
     session.delete(recipe)
     session.commit()
