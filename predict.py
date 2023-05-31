@@ -54,21 +54,20 @@ import random
 def create_recipe(ingredients):
     recipes = []
     print(ingredients)
+    
     # print("generating recipes")
 
-    for ing in ingredients:
-        prompt = create_prompt(ing)
-        op = pl(prompt,
-             max_new_tokens=512,
-             penalty_alpha=0.6,
-             top_k=4,
-             pad_token_id=50259
-            )[0]['generated_text']
-        print(op)
-        
-        # write_to_file(op)
-        recipes.append(op)
-    return recipes
+    # for ing in ingredients:
+    prompt = create_prompt(ingredients)
+    op = pl(prompt,
+         max_new_tokens=512,
+         penalty_alpha=0.6,
+         top_k=4,
+         pad_token_id=50259
+        )[0]['generated_text']
+    print(op)
+
+    return op
 
 
 
