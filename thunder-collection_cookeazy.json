@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "cookeazy",
-    "dateExported": "2023-05-30T04:15:41.466Z",
+    "dateExported": "2023-05-31T17:51:33.936Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -9,12 +9,12 @@
             "_id": "4d00d7ea-565d-4df4-89e4-7fb3112b8210",
             "colId": "74c5ffec-2f2a-4055-8660-fe9fb1d87dcb",
             "containerId": "",
-            "name": "add_user",
+            "name": "register",
             "url": "http://127.0.0.1:5000/register",
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-04-19T19:34:03.872Z",
-            "modified": "2023-05-21T11:28:34.366Z",
+            "modified": "2023-05-31T07:56:59.853Z",
             "headers": [],
             "params": [
                 {
@@ -26,7 +26,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\" : \"joe\",\n  \"email\" : \"joe1234@gmail.com\",\n  \"password\" : \"joe@1234\"\n}",
+                "raw": "{\n  \"username\" : \"Aishantanu\",\n  \"email\" : \"aish123@gmail.com\",\n  \"password\" : \"aish@1234\"\n}",
                 "form": []
             },
             "tests": []
@@ -40,17 +40,17 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-04-19T19:37:01.239Z",
-            "modified": "2023-05-30T03:28:59.359Z",
+            "modified": "2023-05-31T08:07:56.205Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NTQxODk0NH0.RoAHIrZFx98_tVP8Ss8xjVgZxPT6FL59ZZ54yR7IwIM"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NTUyMTMwN30.lqAphRkid1mOrlzRHcCqumNTwsw_SdxFy5Y2usEiKJU"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "\n{\n  \"name\" : \"soyabean\",\n  \"quantity\" : \"2000\",\n  \"unit\" : \"gm\"\n}",
+                "raw": "\n{\n  \"name\" : \"Beans\",\n  \"quantity\" : \"2000\",\n  \"unit\" : \"grams\"\n}",
                 "form": []
             },
             "tests": []
@@ -64,11 +64,11 @@
             "method": "GET",
             "sortNum": 30000,
             "created": "2023-04-19T19:41:38.988Z",
-            "modified": "2023-05-21T11:30:09.472Z",
+            "modified": "2023-05-31T07:53:08.139Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NDY3MDMzMH0.iV5vSbePzMYm41qRo1Xl91WIzYf9CwBij3rv3hEx5Cw"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NTUyMTMwN30.lqAphRkid1mOrlzRHcCqumNTwsw_SdxFy5Y2usEiKJU"
                 }
             ],
             "params": [],
@@ -126,17 +126,17 @@
             "method": "POST",
             "sortNum": 55000,
             "created": "2023-05-12T06:58:19.774Z",
-            "modified": "2023-05-12T10:16:49.620Z",
+            "modified": "2023-05-31T08:10:06.562Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNCIsImV4cCI6MTY4Mzg4NjY3OX0.CXD0w_p_5flhkZZgtfV7bbCt3XwAxIhnL1Mz1K8b9YM"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY4NTUyMTMwN30.lqAphRkid1mOrlzRHcCqumNTwsw_SdxFy5Y2usEiKJU"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"name\" : \"Gram flour\",\n  \"quantity\" : \"4600\",\n  \"unit\" : \"grams\"\n}",
+                "raw": "{\n  \"name\" : \"Beans\",\n  \"quantity\" : \"1600\",\n  \"unit\" : \"grams\"\n}",
                 "form": []
             },
             "tests": []
