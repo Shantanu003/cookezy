@@ -237,12 +237,6 @@ def get_used_ingredients(user):
 
     name = request.json['name']
     quantity = request.json['quantity']
-
-
-
-
-
-    
     unit = request.json['unit']
 
 

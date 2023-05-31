@@ -5,7 +5,7 @@ from transformers import pipeline
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
-model_path = os.path.join(current_directory, 'CookGPT')
+model_path = os.path.join(current_directory, 'CookEzzy\CookGPT')
 
 pl = pipeline(task='text-generation',model=model_path)
 
@@ -53,6 +53,7 @@ import random
 
 def create_recipe(ingredients):
     recipes = []
+    print(ingredients)
     # print("generating recipes")
 
     for ing in ingredients:
