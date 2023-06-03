@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 
 
-def scrape_sanjeev(ing):
+def scrape_recipes(ing):
     query = ing + " site:sanjeevkapoor.com"
     qry = urllib.parse.quote(query)
 
@@ -22,42 +22,7 @@ def scrape_sanjeev(ing):
         urls.append(n[0])
 
     return list(set(urls))
-
-
-
-
-# query = "chicken, tomato, onion site:sanjeevkapoor.com"
-# qry = urllib.parse.quote(query)
-
-
-# print(qry)
-
-
-
-# time.sleep(2)
-
-# # parse the HTML using BeautifulSoup
-
-# soup.find()
-
-# # extract the recipe name
-
-
-
-
-
-# # raw_url = name[0]
-
-# # raw_url = str(raw_url).split("/url?q=")
-# # raw_url[1].split("&amp")
-
-# # url = raw_url[0]
-
-# print(url)
-
-# # Define the URL to scrape
-# # url = 'https://www.sanjeevkapoor.com/Recipe/Paneer-Sandwich-Kabab.html'
-# # url = 'https://www.sanjeevkapoor.com/Recipe/Paneer-Jalfrezi.html' 
+ 
 
 def scrape_sanjeev_recipe(url):
     response = requests.get(url)
@@ -93,20 +58,5 @@ def scrape_sanjeev_recipe(url):
     }
 
     return ret
-
-# parse the HTML using BeautifulSoup
-
-
-# extract the recipe name
-# print(name)
-
-
-
-
-# Find the div element with class 'recipeinstructions' that contains the recipe instructions
-
-# Find all the li elements within the recipe instructions
-
-# Loop through each li element and extract the text within it
 
 

@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 
 
-def scrape_archanas(ing):
+def scrape_recipe_websites(ing):
     query = ing + " site:www.archanaskitchen.com"
     qry = urllib.parse.quote(query)
 
@@ -24,55 +24,11 @@ def scrape_archanas(ing):
 
     return list(set(urls))
 
-
-# url = "https://www.archanaskitchen.com/chicken-in-tomato-onion-gravy-recipe"
-
-# response = requests.get(url)
-# soup = BeautifulSoup(response.content, 'html.parser')
-
-# name = soup.find('h1', class_='recipe-title').text.strip()
-# print("name : ", name)
-
-# # Find the div element with class 'recipeinstructions'
-# recipe_instructions = soup.find('div', class_='recipeinstructions')
-
-# # Find all the li elements within the recipe instructions
-# li_elements = recipe_instructions.find_all('li', itemprop='recipeInstructions')
-
-# # Loop through each li element and extract the text within it
-# print("instructions : ")
-# for li in li_elements:
-#     instruction = li.text.strip()
-#     print(instruction)
-
-# recipe_ingredients = soup.find('div', class_='recipeingredients')
-
-# # Find all the li elements within the recipe ingredients
-# li_elements = recipe_ingredients.find_all('li', itemprop='ingredients')
-
-# # Loop through each li element and extract the ingredient text
-# print("Ingredients : ")
-# for li in li_elements:
-#     ingredient = li.text.strip()
-#     print(ingredient)
-
-
-# # Find the div element with class 'recipe-image'
-# recipe_image_div = soup.find('div', class_='recipe-image')
-
-# # Find the img element within the recipe image div
-# img_element = recipe_image_div.find('img')
-
-# # Extract the 'src' attribute value from the img element
-# image_url = img_element['src']
-
-# print("Image Url : ", image_url)
-
 def scrape_archanas_recipe(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     
-    name = soup.find('h1', class_='recipe-title').text.strip()
+    name = soup.find('h1', class_='recipe-title')
 
     recipe_ingredients = soup.find('div', class_='recipeingredients')
     ingredients_li_elements = recipe_ingredients.find_all('li', itemprop='ingredients')
@@ -82,10 +38,10 @@ def scrape_archanas_recipe(url):
     
     # recipe_image_div = soup.find('div', class_='recipe-image')
     # img_element = recipe_image_div.find('img')
-    image_url = "https://www.archanaskitchen.com" + soup.find('img',class_="recipe-image")['src']
+    # image_url = "https://www.archanaskitchen.com" + soup.find('img',class_="recipe-image")['src']
     # print(image_url)
 
-    name =  name
+    name =  name.text.strip()
     ingredients = []
     instructions = []
 
@@ -101,7 +57,7 @@ def scrape_archanas_recipe(url):
         "name":name,
         "ingredients":ingredients,
         "instruction":instructions,
-        "image_url":image_url
+        # "image_url":image_url
     }
 
     return ret

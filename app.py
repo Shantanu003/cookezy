@@ -33,14 +33,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 def connect_db():
-    #_load_db_vars()
-    # create db create_engine
     db = create_engine('mysql://root:Shantanu_.003@localhost/cookeazy_db')
     return db
 
 
 
-db=connect_db() #establish connection
+db=connect_db()
 Session = sessionmaker(bind=db)
 session = Session()
 
@@ -92,16 +90,18 @@ def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
-        # print(request.headers)
         if 'Authorization' in request.headers:
             token = request.headers['Authorization'].split(" ")[0]
+            # print(token)
 
         if not token:
             return jsonify({'message': 'Token is missing'}), 401
 
         try:
             data = jwt.decode(token, app.config['JWT_SECRET_KEY'], algorithms=['HS256'])
-            current_user = session.query(User).filter_by(id=data['user_id']).first()
+            # print(data)
+            current_user = session.query(User).filter_by(id=int(data['user_id'])).first()
+            # print(current_user)
         except:
             return jsonify({'message': 'Token is invalid'}), 401
 
@@ -116,8 +116,6 @@ def register():
     email = request.json['email']
     password = request.json['password']
 
-    # data = request.get_json()
-    # print(data)
     user = session.query(User).filter_by(username = username).first()
     if user:
         return jsonify({'error': 'Username already exists.'}), 400
@@ -149,7 +147,7 @@ def login():
     # Generate JWT token
     payload = {
         'user_id': str(user.id),
-        'exp': datetime.utcnow() + timedelta(minutes=30)
+        "exp":datetime.utcnow()+timedelta(days=90)
     }
     token = jwt.encode(payload, app.config['JWT_SECRET_KEY'], algorithm='HS256')
     return jsonify({'token': token})
@@ -160,7 +158,6 @@ def login():
 @app.route('/api/users/ingredients', methods=['GET'])
 @token_required
 def get_user_ingredients(user):
-    # user = session.query(User).(user_id)
     ingredients = session.query(Ingredient).filter_by(user_id=user.id).all()
     result_lst = []
     for ingredient in ingredients:    
@@ -197,21 +194,17 @@ def add_ingredient(user):
 @app.route('/api/users/ingredients/<string:name>', methods=['PUT'])
 @token_required
 def update_ingredient(user, name):
-    # get the user and ingredient
-    # user = User.query.get(user_id)
+
     ingredient = session.query(Ingredient).filter_by(name=name.capitalize(), user_id=user.id).first()
 
-    # check if the ingredient exists and belongs to the user
     if not ingredient:
         return jsonify({'error': 'Ingredient not found'}), 404
 
-    # update the ingredient data from the request
     ingredient_data = request.json
     ingredient.name = ingredient_data['name']
     ingredient.quantity = ingredient_data['quantity']
     ingredient.unit = ingredient_data['unit']
 
-    # save the changes to the database
     session.commit()
 
     return jsonify({'message': 'Ingredient updated successfully'})
@@ -241,8 +234,8 @@ def get_used_ingredients(user):
 
 
     THRESHOLD_VALUE = {
-    "number" : 5,
-    "grams" : 500,
+    "no's" : 5,
+    "g" : 500,
     "ml" : 300,
     # Add more units and thresholds here
     }
@@ -251,7 +244,7 @@ def get_used_ingredients(user):
 
     ingredient = session.query(Ingredient).filter_by(name=name.capitalize(), user_id=user.id).first()
 
-    print(ingredient.quantity, quantity)
+    # print(ingredient.quantity, quantity)
     rem_quantity = int(ingredient.quantity) - int(quantity)
 
     if rem_quantity < THRESHOLD_VALUE[unit]:
@@ -278,7 +271,7 @@ def get_used_ingredients(user):
 @app.route('/api/users/get_saved_recipes', methods=['GET'])
 @token_required
 def get_saved_recipes(user):
-    # Logic to fetch and return saved recipes for the logged-in user from the database
+
     user = session.query(User).filter_by(id=user.id).first()
 
     saved_recipes = session.query(SavedRecipe).filter_by(user_id=user.id).all()
@@ -295,14 +288,12 @@ def get_saved_recipes(user):
 @app.route('/api/users/save_recipe', methods=['POST'])
 @token_required
 def save_recipe(user):
-    # Logic to save a recipe to the database
-    # Access recipe data from the request JSON payload
+
     recipe_data = request.json
     recipe = recipe_data['recipe']
 
     user = session.query(User).filter_by(id=user.id).first()
 
-    # Create a new SavedRecipe instance associated with the user and save it to the database
     new_recipe = SavedRecipe(recipe=recipe, user_id=user.id)
     session.add(new_recipe)
     session.commit()
@@ -313,7 +304,7 @@ def save_recipe(user):
 @app.route('/api/users/delete_saved_recipe/<recipe_id>', methods=['DELETE'])
 @token_required
 def delete_saved_recipe(user, recipe_id):
-    # Logic to delete a saved recipe from the database
+
     user = session.query(User).filter_by(id=user.id).first() 
 
     recipe = session.query(SavedRecipe).filter_by(id=recipe_id, user_id=user.id).first()
@@ -325,61 +316,6 @@ def delete_saved_recipe(user, recipe_id):
 
     return jsonify({'message': 'Recipe deleted successfully'})
 
-# @app.route('/api/add_user', methods=['POST'])
-# def add_user():
-#     email = request.json['email']
-#     password = request.json['password']
-    
-#     # Check if user with email already exists
-#     user = session.query(User).filter_by(email=email).first()
-#     if user:
-#         return jsonify({'error': 'User with email already exists.'})
-
-#     # Create new user
-#     new_user = User(email=email, password=password)
-#     # new_user.set_password(password)
-#     session.add(new_user)
-#     session.commit()
-
-#     # Issue a JWT for the user "added newly"
-#     access_token = new_user.get_token()
-    
-#     return jsonify({'message': 'User added successfully.', 'access_token': access_token})
-
-# @app.route('/api/users/<int:user_id>', methods=['PUT'])
-# def update_user(user_id):
-#     user = session.query(User).get(user_id)
-
-#     if not user:
-#         return jsonify({'message': 'User not found'}), 404
-
-#     # get the request data
-#     data = request.get_json()
-
-#     # update user data
-#     user.email = data['email']
-#     user.password = data['password']
-
-#     try:
-#         session.commit()
-#         return jsonify({'message': 'User updated successfully'}), 200
-#     except:
-#         session.rollback()
-#         return jsonify({'message': 'Failed to update user'}), 500
-#     finally:
-#         session.close()
-
-# @app.route('/api/users/<int:user_id>', methods=['DELETE'])
-# def delete_user(user_id):
-#     user = session.query(User).get(user_id)
-#     if not user:
-#         return jsonify({'message': 'User not found.'}), 404
-
-#     session.delete(user)
-#     session.commit()
-#     return jsonify({'message': 'User deleted successfully.'}), 200
-
-
 
 @app.route('/generate-recipes', methods=['POST'])
 def generate_recipes():
@@ -388,28 +324,46 @@ def generate_recipes():
     return jsonify({"Recipies":create_recipe(data)}),200
 
 
-from sanjivkapoor_scraper import scrape_sanjeev, scrape_sanjeev_recipe
-from archanaskitchen_scrapper import scrape_archanas, scrape_archanas_recipe
+from sanjivkapoor_scraper import scrape_recipes, scrape_sanjeev_recipe
+from archanaskitchen_scrapper import scrape_recipe_websites, scrape_archanas_recipe
+
+recipe_websites = []
 
 @app.route('/quick_links',methods=['POST'])
 def get_scraping():
     ingredients = request.json.get('ingredients')
     ingredients = ",".join(ingredients)
     # ret = scrape_sanjeev(ingredients)
-    ret = scrape_archanas(ingredients)
+    ret = scrape_recipe_websites(ingredients)
+    global recipe_websites
+    recipe_websites = ret
+    # print("recipes", recipe_websites)
     return jsonify({"Status":"success","result":ret})
 
 
 @app.route('/get_scrapped_recipes',methods=['POST'])
 def get_scraped_recipe():
-    ingredients = request.json.get('ingredients')
+    ingredients = request.get_json()['ingredients']
+    # print(ingredients)
     ingredients = ",".join(ingredients)
-    ret = scrape_sanjeev(ingredients)
+    ret = scrape_recipes(ingredients)
     op = []
-    op.append(scrape_sanjeev_recipe(ret[0]))
-    op.append(scrape_sanjeev_recipe(ret[1]))
-    op.append(scrape_sanjeev_recipe(ret[2]))
-    
+    global recipe_websites
+
+    if(len(ret) == 1):
+        op.append(scrape_sanjeev_recipe(ret[0]))
+        op.append(scrape_archanas_recipe(recipe_websites[0]))
+        op.append(scrape_archanas_recipe(recipe_websites[1]))
+    elif(len(ret) == 2):
+        op.append(scrape_sanjeev_recipe(ret[0]))
+        op.append(scrape_sanjeev_recipe(ret[1]))
+        op.append(scrape_archanas_recipe(recipe_websites[0]))
+    elif(len(ret) >= 3):
+        op.append(scrape_sanjeev_recipe(ret[0]))
+        op.append(scrape_sanjeev_recipe(ret[1]))
+        op.append(scrape_sanjeev_recipe(ret[2]))
+
+    # print(recipe_websites)
 
     return jsonify({"Status":"success","result":op})
 

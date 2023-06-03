@@ -20,37 +20,6 @@ import numpy as np
 import random
 
 
-# print(ingredients1)
-
-# print(len(ingredients1))
-
-# for j in range(4) : 
-#   for i in range(len(ingredients1)-1,0,-1):
-#     if ingredients1[i] == ",":
-#       ingredients1=ingredients1[0:i]
-#       break
-#   print(ingredients1) 
-#   ingredients.append(ingredients1)
-
-
-#   print(tmplst)
-
-
-
-# def create_multiple(ingredients):
-#     ing = []
-#     # ingredients1 = ' '.join([map(str(),ingredients.split(","))])
-#     # ingredients1 = ingredients1.split(",")
-#     for i in range(1):
-#       tmplst = ingredients.copy()
-#       # print(tmplst)
-#       indx = random.randint(0,len(ingredients)-1)
-#       tmplst.pop(indx)
-#       tmplst = ",".join(tmplst.copy())
-#       ing.append(tmplst)
-    
-#     return create_multiple_recipies(ing)
-
 def create_recipe(ingredients):
     recipes = []
     print(ingredients)
@@ -65,7 +34,7 @@ def create_recipe(ingredients):
          top_k=4,
          pad_token_id=50259
         )[0]['generated_text']
-    print(op)
+    # print(op)
 
     return op
 
